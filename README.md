@@ -1,5 +1,5 @@
 # Secure-Azure-Healthcare-Environment-Project-Achieving-99.9-Uptime-with-HIPAA-Compliance
-complete Azure project architecture for secure healthcare environments with 99.9% uptime and HIPAA compliance.
+Complete Azure project architecture for secure healthcare environments with 99.9% uptime and HIPAA compliance.
 
 ---
 
