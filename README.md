@@ -360,3 +360,65 @@ This comprehensive Azure healthcare environment design ensures 99.9% uptime thro
 3. Comprehensive disaster recovery
 4. Regular compliance auditing
 5. Continuous optimization and improvement
+
+
+
+
+```mermaid
+flowchart TD
+    Users([Healthcare Providers / Admins / Auditors])
+    Users -- HTTPS/VPN --> Firewall[Azure Firewall]
+    Firewall --> WAF[Azure Application Gateway + WAF]
+    WAF --> WebTier[Web Tier (App Service, Managed Identity)]
+    WebTier --> AppTier[App Tier (AKS, VMSS, HPA, Security Policies)]
+    AppTier --> DBTier[Database Tier (Azure SQL, Cosmos DB, Blob, TDE)]
+    DBTier --> Backup[Backup & DR (Geo-redundant, Automated Testing)]
+
+    subgraph Monitoring & Compliance
+      SecurityCenter[Azure Security Center]
+      Sentinel[Azure Sentinel (SOC)]
+      KeyVault[Azure Key Vault]
+      AD[Azure AD, RBAC, PIM, MFA]
+      Policy[Azure Policy, Audit Logs]
+    end
+
+    WebTier -- Logs/Monitoring --> Monitoring & Compliance
+    AppTier -- Logs/Monitoring --> Monitoring & Compliance
+    DBTier -- Logs/Monitoring --> Monitoring & Compliance
+    Users -- Access Mgmt --> AD
+    DBTier -- Key Mgmt --> KeyVault
+
+    classDef box fill:#eaf6fb,stroke:#0366d6,stroke-width:2px;
+    class Firewall,WAF,WebTier,AppTier,DBTier,Backup box;
+
+
+
+Copy and paste the above block into your `README.md` or documentation.  
+You can render the diagram in tools that support Mermaid (like GitHub, Azure DevOps, or VS Code with the Mermaid extension).
+
+---
+
+## Example: Mapping a Specific IaC File or Deployment Script
+
+Suppose you have a Bicep or ARM template called `network.bicep` that defines your core network architecture (firewall, subnets, NSGs).
+
+**Mapping Example:**
+
+| Architecture Block     | IaC File          | Description                                                                          |
+|-----------------------|-------------------|--------------------------------------------------------------------------------------|
+| Azure Firewall        | `network.bicep`   | Deploys Azure Firewall at the network perimeter.                                     |
+| Web/App/DB Subnets    | `network.bicep`   | Defines DMZ, Application, and Database subnets, and assigns NSGs.                    |
+| Network Security      | `network.bicep`   | Configures NSG rules for tier isolation (web, app, db), restricts management access. |
+| Application Gateway   | `appgw.bicep`     | Deploys Azure Application Gateway with WAF enabled.                                  |
+
+**Example Table for Documentation:**
+```markdown
+| Architecture Component      | IaC File         | Description                                                      |
+|----------------------------|------------------|------------------------------------------------------------------|
+| Azure Firewall              | network.bicep    | Deploys the Azure Firewall and configures threat protection.     |
+| DMZ, App, DB Subnets        | network.bicep    | Creates isolated subnets for each tier with NSG assignments.     |
+| Application Gateway + WAF   | appgw.bicep      | Deploys Application Gateway with integrated Web Application FW.  |
+| AKS Cluster                 | aks.bicep        | Deploys AKS with node pools across availability zones.           |
+| Azure SQL Database          | database.bicep   | Provisions SQL DB with geo-replication and TDE enabled.          |
+| Key Vault                   | keyvault.bicep   | Sets up Azure Key Vault for secrets and key management.          |
+| Azure Monitor/Sentinel      | monitor.bicep    | Configures centralized logging and Security Operations Center.   |
