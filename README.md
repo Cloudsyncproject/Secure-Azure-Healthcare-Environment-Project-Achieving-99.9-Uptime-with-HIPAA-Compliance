@@ -2,6 +2,9 @@
 Complete Azure project architecture for secure healthcare environments with 99.9% uptime and HIPAA compliance.
 
 ---
+Complete modern Azure Healthcare Architecture diagram with all layers (Networking, Web, App, IoT/FHIR, Data, Security, and DR) integrated professionally:
+
+<img width="1536" height="1024" alt="Compliance-Architecture" src="https://github.com/user-attachments/assets/5111e62d-f9bf-4e47-b8d1-165ca2588fb9" />
 
 ## Project Overview
 
