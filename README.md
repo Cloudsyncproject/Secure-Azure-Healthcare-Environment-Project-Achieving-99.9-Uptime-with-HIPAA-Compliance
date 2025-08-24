@@ -353,24 +353,6 @@ This comprehensive Azure healthcare environment design ensures 99.9% uptime thro
 
 
 
-```mermaid
-flowchart TD
-    Users([Healthcare Providers / Admins / Auditors])
-    Users -- HTTPS/VPN --> Firewall[Azure Firewall]
-    Firewall --> WAF[Azure Application Gateway + WAF]
-    WAF --> WebTier[Web Tier (App Service, Managed Identity)]
-    WebTier --> AppTier[App Tier (AKS, VMSS, HPA, Security Policies)]
-    AppTier --> DBTier[Database Tier (Azure SQL, Cosmos DB, Blob, TDE)]
-    DBTier --> Backup[Backup & DR (Geo-redundant, Automated Testing)]
-
-    subgraph Monitoring & Compliance
-      SecurityCenter[Azure Security Center]
-      Sentinel[Azure Sentinel (SOC)]
-      KeyVault[Azure Key Vault]
-      AD[Azure AD, RBAC, PIM, MFA]
-      Policy[Azure Policy, Audit Logs]
-    end
-
     WebTier -- Logs/Monitoring --> Monitoring & Compliance
     AppTier -- Logs/Monitoring --> Monitoring & Compliance
     DBTier -- Logs/Monitoring --> Monitoring & Compliance
